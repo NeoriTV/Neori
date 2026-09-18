@@ -1,24 +1,27 @@
 /* Neori TV shell theme
-   Layered overrides: does not modify Lampa core files. */
+   Layered overrides only. Lampa core remains untouched. */
 
 :root {
-  --neori-bg: #0b1320;
-  --neori-bg-deep: #070d16;
-  --neori-surface: rgba(24, 34, 48, 0.58);
-  --neori-surface-strong: rgba(31, 43, 59, 0.78);
-  --neori-border: rgba(255, 255, 255, 0.10);
-  --neori-text: #f4f6f8;
-  --neori-text-muted: #aeb7c2;
+  --neori-bg: #08111d;
+  --neori-bg-deep: #050a12;
+  --neori-surface: rgba(20, 30, 44, 0.56);
+  --neori-surface-strong: rgba(27, 39, 56, 0.76);
+  --neori-border: rgba(255, 255, 255, 0.09);
+  --neori-border-strong: rgba(255, 255, 255, 0.16);
+  --neori-text: #f5f7fa;
+  --neori-text-muted: #aeb8c5;
   --neori-orange: #ff7a18;
-  --neori-orange-soft: rgba(255, 122, 24, 0.20);
-  --neori-blue-glow: rgba(35, 125, 255, 0.14);
+  --neori-orange-bright: #ff8a2a;
+  --neori-orange-soft: rgba(255, 122, 24, 0.18);
+  --neori-blue-glow: rgba(31, 105, 214, 0.16);
 }
 
 html,
 body {
   background:
-    radial-gradient(circle at 15% 10%, var(--neori-blue-glow), transparent 32%),
-    linear-gradient(135deg, var(--neori-bg-deep) 0%, var(--neori-bg) 55%, #121a25 100%) !important;
+    radial-gradient(circle at 14% 8%, var(--neori-blue-glow), transparent 30%),
+    radial-gradient(circle at 88% 90%, rgba(255, 122, 24, 0.04), transparent 26%),
+    linear-gradient(145deg, var(--neori-bg-deep) 0%, var(--neori-bg) 58%, #111a26 100%) !important;
   color: var(--neori-text);
 }
 
@@ -26,8 +29,7 @@ body {
   background-color: var(--neori-bg) !important;
 }
 
-/* Transparent / glass navigation and surface elements.
-   These selectors are intentionally generic enough to remain an outer layer. */
+/* Shared glass surfaces. */
 .head,
 .menu,
 .navigation,
@@ -36,37 +38,79 @@ body {
 .panel,
 .dialog,
 .modal__content,
-.selectbox__content {
-  background: var(--neori-surface) !important;
+.selectbox__content,
+.settings__content {
+  background: linear-gradient(
+    180deg,
+    rgba(31, 43, 59, 0.68),
+    rgba(15, 24, 36, 0.62)
+  ) !important;
+  border: 1px solid var(--neori-border);
   border-color: var(--neori-border) !important;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.20);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
-/* Orange accent only where it reads as an accent/action. */
-.focus,
-.selector.focus,
+/* Navigation buttons: transparent, soft rounded glass. */
+.menu__item,
+.navigation__item,
+.nav__item,
+.button {
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid transparent;
+  border-radius: 0.75em;
+  transition:
+    background-color 0.16s ease,
+    border-color 0.16s ease,
+    box-shadow 0.16s ease,
+    transform 0.16s ease;
+}
+
+.menu__item:hover,
+.navigation__item:hover,
+.nav__item:hover,
+.button:hover {
+  background: rgba(255, 255, 255, 0.075);
+  border-color: var(--neori-border-strong);
+}
+
 .menu__item.focus,
 .navigation__item.focus,
+.nav__item.focus,
 .button.focus,
-.active,
-.selected {
-  box-shadow: inset 0 0 0 1px var(--neori-orange-soft);
+.selector.focus {
+  background:
+    linear-gradient(
+      90deg,
+      var(--neori-orange-soft),
+      rgba(255, 122, 24, 0.07)
+    ) !important;
+  border-color: rgba(255, 122, 24, 0.46) !important;
+  box-shadow:
+    inset 3px 0 0 var(--neori-orange),
+    0 0 22px rgba(255, 122, 24, 0.08);
 }
 
-.button.focus,
-.menu__item.focus,
-.navigation__item.focus {
-  border-color: rgba(255, 122, 24, 0.45) !important;
+/* Small orange markers instead of large orange surfaces. */
+.active,
+.selected {
+  box-shadow:
+    inset 0 -2px 0 var(--neori-orange),
+    0 0 18px rgba(255, 122, 24, 0.06);
 }
 
 a,
 .accent,
 .color-accent {
+  color: var(--neori-orange-bright);
+}
+
+.icon--blink.focus {
   color: var(--neori-orange);
 }
 
-/* Keep text readable over translucent surfaces. */
+/* Typography. */
 .modal__content,
 .selectbox__content,
 .settings__content {
@@ -79,7 +123,28 @@ a,
   color: var(--neori-text-muted);
 }
 
-/* Our welcome layer can use the uploaded Neori TV artwork. */
+/* Thin scrollbar accents for any shell-owned scrollable area. */
+.neori-shell-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 122, 24, 0.45) transparent;
+}
+
+.neori-shell-scroll::-webkit-scrollbar {
+  display: block;
+  width: 4px;
+  height: 4px;
+}
+
+.neori-shell-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 122, 24, 0.45);
+  border-radius: 999px;
+}
+
+.neori-shell-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Welcome layer using the uploaded Neori TV artwork. */
 .neori-shell-welcome {
   position: fixed;
   inset: 0;
@@ -87,13 +152,34 @@ a,
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   background:
-    linear-gradient(rgba(4, 8, 14, 0.86), rgba(4, 8, 14, 0.92)),
+    linear-gradient(
+      180deg,
+      rgba(3, 7, 12, 0.82),
+      rgba(4, 9, 16, 0.93)
+    ),
     url("./neori-tv.jpg.jpeg") center / cover no-repeat;
   transition: opacity 0.35s ease;
+}
+
+.neori-shell-welcome::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 42%, rgba(31, 105, 214, 0.10), transparent 42%);
+  pointer-events: none;
 }
 
 .neori-shell-welcome.is-hidden {
   opacity: 0;
   pointer-events: none;
+}
+
+/* Preserve interaction states and avoid forcing transforms on Lampa content. */
+.menu__item.focus *,
+.navigation__item.focus *,
+.nav__item.focus *,
+.button.focus * {
+  color: inherit;
 }
