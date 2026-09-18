@@ -1,7 +1,6 @@
 /* Neori shell: top navigation prototype.
-   Visual/layout overrides only; Lampa core remains untouched. */
+   Visual/layout layer only. Lampa core and menu controller remain untouched. */
 
-/* Reposition the existing menu into a horizontal top bar. */
 .menu {
   position: fixed !important;
   top: 0 !important;
@@ -9,51 +8,88 @@
   right: 0 !important;
   bottom: auto !important;
   width: 100% !important;
-  height: 4.25em !important;
-  min-height: 4.25em !important;
-  max-height: 4.25em !important;
-  z-index: 90 !important;
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  padding: 0 1.25em !important;
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
+  height: 4.45em !important;
+  z-index: 95 !important;
   background:
     linear-gradient(
       180deg,
-      rgba(9, 18, 31, 0.95),
-      rgba(9, 18, 31, 0.78)
+      rgba(7, 16, 28, 0.97),
+      rgba(10, 19, 32, 0.88)
     ) !important;
-  border-right: 0 !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.20);
+  border: 0 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 }
 
-/* Menu entries become compact horizontal navigation buttons. */
-.menu__item {
+/* The real menu has three .menu__case blocks.
+   Make the menu a single horizontal strip and keep cases side by side. */
+.menu__case {
+  display: flex !important;
   flex: 0 0 auto !important;
   width: auto !important;
-  min-width: 7em;
-  height: 3.05em !important;
-  margin: 0 0.18em !important;
+  height: 100% !important;
+  align-items: center !important;
+}
+
+.menu__list {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  width: auto !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.menu__case.nosort {
+  display: flex !important;
+}
+
+.menu__split {
+  width: 1px !important;
+  height: 1.9em !important;
+  margin: 0 0.45em !important;
+  background: rgba(255, 255, 255, 0.10) !important;
+  flex: 0 0 auto !important;
+}
+
+/* Compact horizontal navigation buttons. */
+.menu__item {
+  position: relative !important;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 6.4em !important;
+  height: 3.15em !important;
+  margin: 0 0.16em !important;
   padding: 0 0.85em !important;
-  display: inline-flex !important;
+  display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  gap: 0.45em;
   border-radius: 0.72em !important;
   background: rgba(255, 255, 255, 0.035) !important;
   border: 1px solid transparent !important;
 }
 
+.menu__ico {
+  width: 1.18em !important;
+  height: 1.18em !important;
+  flex: 0 0 auto !important;
+}
+
+.menu__text {
+  white-space: nowrap !important;
+  font-size: 1em !important;
+}
+
 .menu__item.focus {
   background:
     linear-gradient(
-      90deg,
+      180deg,
       rgba(255, 122, 24, 0.20),
-      rgba(255, 122, 24, 0.06)
+      rgba(255, 122, 24, 0.07)
     ) !important;
   border-color: rgba(255, 122, 24, 0.52) !important;
   box-shadow:
@@ -61,20 +97,26 @@
     0 0 18px rgba(255, 122, 24, 0.08);
 }
 
-/* The content is shifted down so the new top navigation does not cover it. */
+/* Keep the main page below the new top menu. */
 .wrap {
   padding-top: 4.6em !important;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(8, 17, 29, 0.12),
-      rgba(5, 10, 18, 0.40)
-    ) !important;
 }
 
-/* Keep the existing header below the new navigation layer. */
+.wrap__left {
+  width: 0 !important;
+  min-width: 0 !important;
+  max-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.wrap__content {
+  width: 100% !important;
+  padding-left: 0 !important;
+}
+
+/* Existing Lampa header remains usable, just below navigation. */
 .head {
-  top: 4.25em !important;
+  top: 4.45em !important;
   background: rgba(7, 16, 28, 0.72) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.075);
   box-shadow: 0 7px 24px rgba(0, 0, 0, 0.15);
@@ -82,7 +124,6 @@
   -webkit-backdrop-filter: blur(15px);
 }
 
-/* Compact top-level actions. */
 .head__action,
 .head__actions .selector,
 .head__actions .button {
@@ -96,12 +137,9 @@
 .head__actions .button.focus {
   background: rgba(255, 122, 24, 0.13) !important;
   border-color: rgba(255, 122, 24, 0.56) !important;
-  box-shadow:
-    0 0 0 1px rgba(255, 122, 24, 0.16),
-    0 0 20px rgba(255, 122, 24, 0.10);
+  box-shadow: 0 0 20px rgba(255, 122, 24, 0.10);
 }
 
-/* Cards keep the original geometry; only emphasis is restyled. */
 .card,
 .items-line__item {
   border-radius: 0.78em;
@@ -119,7 +157,6 @@
     0 12px 34px rgba(0, 0, 0, 0.30);
 }
 
-/* Dialogs remain glass and centered. */
 .modal__content,
 .selectbox__content,
 .settings__content {
@@ -162,14 +199,13 @@ a,
 }
 
 @media screen and (max-width: 1000px) {
-  .menu {
-    padding-left: 0.65em !important;
-    padding-right: 0.65em !important;
+  .menu__item {
+    min-width: 5.5em !important;
+    padding-left: 0.55em !important;
+    padding-right: 0.55em !important;
   }
 
-  .menu__item {
-    min-width: 5.8em;
-    padding-left: 0.65em !important;
-    padding-right: 0.65em !important;
+  .menu__text {
+    font-size: 0.92em !important;
   }
 }
