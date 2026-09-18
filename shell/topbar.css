@@ -1,0 +1,106 @@
+.neori-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.neori-topbar.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.neori-topbar__inner {
+  display: flex;
+  align-items: center;
+  gap: .7em;
+  min-height: 4.1em;
+  padding: .55em .8em;
+  background: rgba(7, 16, 28, .94);
+  border-bottom: 1px solid rgba(255, 255, 255, .09);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, .28);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.neori-topbar__brand {
+  display: flex;
+  align-items: center;
+  gap: .45em;
+  flex: 0 0 auto;
+  color: #fff;
+  font-size: 1.05em;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.neori-topbar__brand img {
+  width: 2.1em;
+  height: 2.1em;
+  object-fit: cover;
+  border-radius: .45em;
+}
+
+.neori-topbar__nav {
+  display: flex;
+  align-items: center;
+  gap: .22em;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex: 1 1 auto;
+}
+
+.neori-topbar__nav::-webkit-scrollbar {
+  display: none;
+}
+
+.neori-topbar__item,
+.neori-topbar__close {
+  flex: 0 0 auto;
+  min-height: 2.55em;
+  padding: 0 .9em;
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: .7em;
+  color: #f5f7fa;
+  background: rgba(255, 255, 255, .045);
+  font: inherit;
+  cursor: pointer;
+}
+
+.neori-topbar__item:hover,
+.neori-topbar__item:focus {
+  border-color: rgba(255, 122, 24, .45);
+  background: rgba(255, 122, 24, .13);
+  outline: none;
+}
+
+.neori-topbar__close {
+  width: 2.55em;
+  padding: 0;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.neori-topbar__close:hover,
+.neori-topbar__close:focus {
+  border-color: rgba(255, 122, 24, .45);
+  background: rgba(255, 122, 24, .13);
+  outline: none;
+}
+
+@media screen and (max-width: 900px) {
+  .neori-topbar__brand span {
+    display: none;
+  }
+
+  .neori-topbar__item {
+    padding: 0 .7em;
+  }
+}
