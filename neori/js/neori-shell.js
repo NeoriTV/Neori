@@ -254,8 +254,8 @@
     var hero=el('section','neori-hero');
     hero.appendChild(logo());
     hero.appendChild(el('div','neori-kicker','NEORI TV'));
-    hero.appendChild(el('h1','neori-title','Кино. Сериалы. Всё в одном TV-интерфейсе.'));
-    hero.appendChild(el('p','neori-desc','Современный интерфейс для пульта. Каталог загружается напрямую через Lampa API, а Lampa остаётся совместимым ядром для плагинов и плеера.'));
+    hero.appendChild(el('h1','neori-title','Фильмы и сериалы на большом экране.'));
+    hero.appendChild(el('p','neori-desc','Быстрый TV-каталог с постерами, поиском и подробностями. Управление рассчитано на пульт Media Station X, а Lampa используется для данных и воспроизведения.'));
     var actions=el('div','neori-actions');
     actions.appendChild(button('Фильмы','movies','primary'));
     actions.appendChild(button('Сериалы','series'));
@@ -273,6 +273,11 @@
     }
 
     var catalog=el('section','neori-catalog');
+    var quick=el('section','neori-content-row');
+    var qh=el('div','neori-row-head'); qh.appendChild(el('h2','neori-row-title','Разделы')); quick.appendChild(qh);
+    var qr=el('div','neori-card-row');
+    [['Фильмы','movies'],['Сериалы','series'],['Избранное','collection'],['История','history'],['Поиск','search']].forEach(function(x){var b=button(x[0],x[1],'neori-movie-card neori-quick-card');b.style.width='168px';b.style.height='72px';b.style.padding='0 16px';b.style.borderRadius='10px';b.style.fontSize='16px';qr.appendChild(b);});
+    quick.appendChild(qr); main.appendChild(quick);
     catalog.appendChild(el('div','neori-section-title','Каталог'));
     catalog.appendChild(el('div','neori-loading','Загрузка подборок…'));
     main.appendChild(catalog);
