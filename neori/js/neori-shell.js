@@ -72,7 +72,7 @@
     else if(action === 'continue') lampaFavorite('continued','Продолжить просмотр');
     else if(action === 'history') lampaFavorite('history','История');
     else if(action === 'favorites') lampaFavorite('like','Избранное');
-    else if(action === 'search') lampaSearch();
+    else if(action === 'search') openSearch();
     else if(action === 'settings') lampaSettings();
     else if(action === 'native-plugins') nativePlugins();
     else if(action === 'plugins') openPlugins();
@@ -286,6 +286,26 @@
 
     loadHomeRows(catalog);
     refreshFocus();
+  }
+
+  function openSearch(){
+    if(!ready()) return;
+    var p=openPanel('Поиск');
+    var form=el('div','neori-search-form');
+    var input=el('input','neori-search-input'); input.type='text'; input.placeholder='Название фильма или сериала'; input.autocomplete='off';
+    var go=button('Найти','search-run','primary'); form.appendChild(input); form.appendChild(go); p.appendChild(form);
+    var results=el('div','neori-search-results'); p.appendChild(results);
+    function run(){
+      var q=(input.value||'').trim(); if(!q) return;
+      clear(results); results.appendChild(el('div','neori-loading','Поиск…'));
+      if(!Lampa.Api || !Lampa.Api.search) return;
+      Lampa.Api.search({query:q,page:1,source:Lampa.Storage.field('source') || 'tmdb'},function(data){
+        clear(results); var list=data && (data.results || data.data || []);
+        if(!Array.isArray(list) || !list.length){results.appendChild(el('div','neori-empty','Ничего не найдено.'));return;}
+        var row=el('div','neori-card-row neori-search-row'); list.slice(0,18).forEach(function(card){row.appendChild(createMovieCard(card));}); results.appendChild(row); refreshFocus();
+      },function(){clear(results);results.appendChild(el('div','neori-empty','Не удалось выполнить поиск.'));});
+    }
+    go.onclick=run; input.onkeydown=function(e){if(e.key==='Enter'){run();e.preventDefault();}}; setTimeout(function(){input.focus();},50); refreshFocus();
   }
 
   function openPanel(title){
