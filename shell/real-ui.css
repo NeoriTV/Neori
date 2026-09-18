@@ -1,26 +1,94 @@
-/* Neori shell: real Lampa UI visual overrides.
-   No layout or application logic is changed here. */
+/* Neori shell: top navigation prototype.
+   Visual/layout overrides only; Lampa core remains untouched. */
 
-.wrap {
+/* Reposition the existing menu into a horizontal top bar. */
+.menu {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: auto !important;
+  width: 100% !important;
+  height: 4.25em !important;
+  min-height: 4.25em !important;
+  max-height: 4.25em !important;
+  z-index: 90 !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  padding: 0 1.25em !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
   background:
-    linear-gradient(180deg, rgba(8, 17, 29, 0.20), rgba(5, 10, 18, 0.46)) !important;
+    linear-gradient(
+      180deg,
+      rgba(9, 18, 31, 0.95),
+      rgba(9, 18, 31, 0.78)
+    ) !important;
+  border-right: 0 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.20);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
+/* Menu entries become compact horizontal navigation buttons. */
+.menu__item {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 7em;
+  height: 3.05em !important;
+  margin: 0 0.18em !important;
+  padding: 0 0.85em !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 0.72em !important;
+  background: rgba(255, 255, 255, 0.035) !important;
+  border: 1px solid transparent !important;
+}
+
+.menu__item.focus {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 122, 24, 0.20),
+      rgba(255, 122, 24, 0.06)
+    ) !important;
+  border-color: rgba(255, 122, 24, 0.52) !important;
+  box-shadow:
+    inset 0 -3px 0 #ff7a18,
+    0 0 18px rgba(255, 122, 24, 0.08);
+}
+
+/* The content is shifted down so the new top navigation does not cover it. */
+.wrap {
+  padding-top: 4.6em !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(8, 17, 29, 0.12),
+      rgba(5, 10, 18, 0.40)
+    ) !important;
+}
+
+/* Keep the existing header below the new navigation layer. */
 .head {
-  background: rgba(7, 16, 28, 0.74) !important;
+  top: 4.25em !important;
+  background: rgba(7, 16, 28, 0.72) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.075);
-  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.18);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 7px 24px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
 }
 
+/* Compact top-level actions. */
 .head__action,
 .head__actions .selector,
 .head__actions .button {
   border-radius: 0.72em;
   background: rgba(255, 255, 255, 0.055) !important;
   border: 1px solid rgba(255, 255, 255, 0.09);
-  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.12);
 }
 
 .head__action.focus,
@@ -33,50 +101,9 @@
     0 0 20px rgba(255, 122, 24, 0.10);
 }
 
-.menu {
-  background:
-    linear-gradient(
-      180deg,
-      rgba(10, 20, 33, 0.88),
-      rgba(8, 16, 27, 0.82)
-    ) !important;
-  border-right: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 12px 0 36px rgba(0, 0, 0, 0.16);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-}
-
-.menu__item {
-  margin: 0.12em 0.35em;
-  border-radius: 0.68em;
-  background: rgba(255, 255, 255, 0.032);
-  border: 1px solid transparent;
-}
-
-.menu__item.focus {
-  background:
-    linear-gradient(
-      90deg,
-      rgba(255, 122, 24, 0.18),
-      rgba(255, 122, 24, 0.055)
-    ) !important;
-  border-color: rgba(255, 122, 24, 0.50) !important;
-  box-shadow:
-    inset 3px 0 0 #ff7a18,
-    0 0 18px rgba(255, 122, 24, 0.07);
-}
-
-.menu__item.focus,
-.head__action.focus {
-  color: #ffffff !important;
-}
-
-.content {
-  background: transparent !important;
-}
-
-.items-line__item,
-.card {
+/* Cards keep the original geometry; only emphasis is restyled. */
+.card,
+.items-line__item {
   border-radius: 0.78em;
 }
 
@@ -92,16 +119,7 @@
     0 12px 34px rgba(0, 0, 0, 0.30);
 }
 
-.card.focus .card__view {
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.11);
-}
-
-.card__quality,
-.card__marker,
-.card__badge {
-  border-radius: 0.34em;
-}
-
+/* Dialogs remain glass and centered. */
 .modal__content,
 .selectbox__content,
 .settings__content {
@@ -126,12 +144,6 @@
     0 0 18px rgba(255, 122, 24, 0.06);
 }
 
-.selector.active,
-.button.active,
-.selected {
-  box-shadow: inset 0 -2px 0 #ff7a18;
-}
-
 a,
 .accent,
 .color-accent {
@@ -151,6 +163,13 @@ a,
 
 @media screen and (max-width: 1000px) {
   .menu {
-    box-shadow: 8px 0 24px rgba(0, 0, 0, 0.14);
+    padding-left: 0.65em !important;
+    padding-right: 0.65em !important;
+  }
+
+  .menu__item {
+    min-width: 5.8em;
+    padding-left: 0.65em !important;
+    padding-right: 0.65em !important;
   }
 }
