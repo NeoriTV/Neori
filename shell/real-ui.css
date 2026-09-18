@@ -1,0 +1,100 @@
+/* Neori shell: selectors confirmed from the current Lampa bundle. */
+/* Kept separate so the existing Lampa CSS remains untouched. */
+
+/* Main application surfaces. */
+.wrap {
+  background:
+    linear-gradient(180deg, rgba(8, 17, 29, 0.18), rgba(5, 10, 18, 0.42)) !important;
+}
+
+.head {
+  background: rgba(10, 18, 29, 0.68) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.head__action,
+.head__actions .selector,
+.head__actions .button {
+  border-radius: 0.75em;
+  background: rgba(255, 255, 255, 0.045) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.head__action.focus,
+.head__actions .selector.focus,
+.head__actions .button.focus {
+  background: rgba(255, 122, 24, 0.14) !important;
+  border-color: rgba(255, 122, 24, 0.50) !important;
+  box-shadow: 0 0 20px rgba(255, 122, 24, 0.09);
+}
+
+/* Side / primary navigation. */
+.menu {
+  background: rgba(9, 17, 28, 0.84) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.menu__item {
+  border-radius: 0.72em;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid transparent;
+}
+
+.menu__item.focus {
+  background: linear-gradient(90deg, rgba(255, 122, 24, 0.17), rgba(255, 122, 24, 0.05)) !important;
+  border-color: rgba(255, 122, 24, 0.46) !important;
+  box-shadow: inset 3px 0 0 #ff7a18;
+}
+
+/* Content rows and poster cards. */
+.items-line__item,
+.card {
+  border-radius: 0.82em;
+}
+
+.card.focus,
+.items-line__item.focus {
+  box-shadow:
+    0 0 0 2px rgba(255, 122, 24, 0.86),
+    0 10px 34px rgba(0, 0, 0, 0.26);
+}
+
+.card__view {
+  border-radius: 0.82em;
+  overflow: hidden;
+}
+
+/* Small metadata / quality markers use orange only as an accent. */
+.card__quality,
+.card__marker,
+.card__badge {
+  border-radius: 0.35em;
+}
+
+/* Dialogs / settings keep the same glass language. */
+.modal__content,
+.selectbox__content,
+.settings__content {
+  background: rgba(14, 23, 35, 0.88) !important;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* Preserve the core layout: only visual properties are overridden. */
+.card,
+.items-line__item,
+.menu__item,
+.head__action,
+.button,
+.selector {
+  transition:
+    background-color 0.16s ease,
+    border-color 0.16s ease,
+    box-shadow 0.16s ease;
+}
