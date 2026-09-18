@@ -183,3 +183,78 @@ a,
 .button.focus * {
   color: inherit;
 }
+
+
+/* Welcome / splash presentation. The layer is opt-in via .neori-shell-welcome. */
+.neori-shell-welcome__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: min(82vw, 720px);
+  padding: 3em 2.5em;
+  text-align: center;
+  background: rgba(9, 17, 28, 0.38);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 1.25em;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.neori-shell-welcome__logo {
+  width: min(68vw, 420px);
+  max-height: 180px;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 34px rgba(0, 0, 0, 0.34));
+}
+
+.neori-shell-welcome__title {
+  margin-top: 1.35em;
+  font-size: clamp(1.4em, 3vw, 2.15em);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.neori-shell-welcome__subtitle {
+  margin-top: 0.7em;
+  max-width: 34em;
+  color: var(--neori-text-muted);
+  font-size: clamp(0.95em, 2vw, 1.15em);
+  line-height: 1.45;
+}
+
+.neori-shell-welcome__progress {
+  width: min(54vw, 260px);
+  height: 3px;
+  margin-top: 2em;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.10);
+  border-radius: 999px;
+}
+
+.neori-shell-welcome__progress::after {
+  content: "";
+  display: block;
+  width: 42%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--neori-orange), var(--neori-orange-bright));
+  border-radius: inherit;
+  animation: neori-shell-progress 1.25s ease-in-out infinite;
+}
+
+@keyframes neori-shell-progress {
+  0% { transform: translateX(-150%); }
+  55% { transform: translateX(100%); }
+  100% { transform: translateX(260%); }
+}
+
+@media screen and (max-width: 600px) {
+  .neori-shell-welcome__content {
+    width: calc(100vw - 2em);
+    padding: 2.2em 1.4em;
+    border-radius: 1em;
+  }
+}
