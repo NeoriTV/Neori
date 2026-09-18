@@ -23,7 +23,7 @@
 ## 🟡 Можно менять 50/50
 
 - [ ] 🟡 index.html — внешний каркас
-- [ ] 🟡 index.html — подключение наших файлов
+- [x] ✅ 🟡 index.html — подключение наших файлов — подключён `shell/theme.css` отдельным слоем
 - [ ] 🟡 index.html — порядок загрузки скриптов
 - [ ] 🟡 index.html — welcome-логика
 - [ ] 🟡 index.html — cache_version
